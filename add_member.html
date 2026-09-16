@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Add Member</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<nav>
+
+    <div class="logo">
+        📚 Library Management System
+    </div>
+
+    <div class="menu">
+
+        <a href="/">Home</a>
+        <a href="/books">Books</a>
+        <a href="/members">Members</a>
+
+    </div>
+
+</nav>
+
+
+<div class="form-container">
+
+    <h1>👤 Add New Member</h1>
+
+    <p>Add a new library member.</p>
+
+
+    <form method="POST">
+
+        <label>Member Name</label>
+
+        <input
+            type="text"
+            name="name"
+            placeholder="Enter member name"
+            required>
+
+
+        <label>Phone Number</label>
+
+        <input
+            type="tel"
+            name="phone"
+            placeholder="Enter phone number"
+            required>
+
+
+        <button type="submit"
+                class="submit-btn">
+
+            Add Member
+
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+
+</html>

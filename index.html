@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Library Management System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+0
+<body>
+
+<nav>
+
+    <div class="logo">
+        📚 Library Management System
+    </div>
+
+    <div class="menu">
+
+        <a href="/">Home</a>
+        <a href="/books">Books</a>
+        <a href="/members">Members</a>
+        <a href="/add-book">Add Book</a>
+        <a href="/add-member">Add Member</a>
+
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+    <h1>Library Dashboard</h1>
+
+    <p class="subtitle">
+        Welcome to Library Management System
+    </p>
+
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="icon">📚</div>
+            <h3>Total Books</h3>
+            <h2>{{ total_books }}</h2>
+        </div>
+
+
+        <div class="card">
+            <div class="icon">✅</div>
+            <h3>Available Books</h3>
+            <h2>{{ available_books }}</h2>
+        </div>
+
+
+        <div class="card">
+            <div class="icon">📖</div>
+            <h3>Issued Books</h3>
+            <h2>{{ issued_books }}</h2>
+        </div>
+
+
+        <div class="card">
+            <div class="icon">👥</div>
+            <h3>Total Members</h3>
+            <h2>{{ total_members }}</h2>
+        </div>
+
+    </div>
+
+
+    <h2 class="section-title">
+        Quick Actions
+    </h2>
+
+
+    <div class="actions">
+
+        <a href="/add-book" class="action">
+            ➕ Add Book
+        </a>
+
+        <a href="/books" class="action">
+            📚 View Books
+        </a>
+
+        <a href="/add-member" class="action">
+            👤 Add Member
+        </a>
+
+        <a href="/members" class="action">
+            👥 View Members
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

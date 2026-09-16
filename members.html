@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Members</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<nav>
+
+    <div class="logo">
+        📚 Library Management System
+    </div>
+
+    <div class="menu">
+
+        <a href="/">Home</a>
+        <a href="/books">Books</a>
+        <a href="/members">Members</a>
+        <a href="/add-book">Add Book</a>
+        <a href="/add-member">Add Member</a>
+
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+    <div class="page-header">
+
+        <h1>👥 Library Members</h1>
+
+        <a href="/add-member"
+           class="btn">
+
+            + Add Member
+
+        </a>
+
+    </div>
+
+
+    {% if members %}
+
+    <div class="table-box">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for member in members %}
+
+                <tr>
+
+                    <td>
+                        {{ member.id }}
+                    </td>
+
+                    <td>
+                        <strong>{{ member.name }}</strong>
+                    </td>
+
+                    <td>
+                        {{ member.phone }}
+                    </td>
+
+                    <td>
+
+                        <a
+                            href="/remove-member/{{ member.id }}"
+                            class="delete-btn"
+                            onclick="return confirm('Are you sure you want to remove this member?')">
+
+                            Remove
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+    <div class="empty">
+
+        <h2>No Members Found</h2>
+
+        <p>Add your first member.</p>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+
+</html>
