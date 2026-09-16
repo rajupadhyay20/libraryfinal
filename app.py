@@ -4,10 +4,11 @@ import os
 
 app = Flask(__name__)
 
-DATABASE = "library.db"
-
-
 # ---------------- DATABASE ----------------
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATABASE = os.path.join(BASE_DIR, "library.db")
+
 
 def get_db():
     conn = sqlite3.connect(DATABASE)
@@ -18,6 +19,7 @@ def get_db():
 def create_database():
     conn = get_db()
 
+    # Books table
     conn.execute("""
         CREATE TABLE IF NOT EXISTS books (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -28,6 +30,7 @@ def create_database():
         )
     """)
 
+    # Members table
     conn.execute("""
         CREATE TABLE IF NOT EXISTS members (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -38,6 +41,11 @@ def create_database():
 
     conn.commit()
     conn.close()
+
+
+# IMPORTANT:
+# Create database when Flask/Gunicorn starts
+create_database()
 
 
 # ---------------- HOME ----------------
@@ -77,6 +85,7 @@ def home():
 
 @app.route("/add-book", methods=["GET", "POST"])
 def add_book():
+
     if request.method == "POST":
 
         title = request.form["title"]
@@ -101,6 +110,7 @@ def add_book():
 
 @app.route("/books")
 def books():
+
     conn = get_db()
 
     books = conn.execute("""
@@ -128,6 +138,7 @@ def books():
 
 @app.route("/delete-book/<int:book_id>")
 def delete_book(book_id):
+
     conn = get_db()
 
     conn.execute(
@@ -145,6 +156,7 @@ def delete_book(book_id):
 
 @app.route("/add-member", methods=["GET", "POST"])
 def add_member():
+
     if request.method == "POST":
 
         name = request.form["name"]
@@ -169,6 +181,7 @@ def add_member():
 
 @app.route("/members")
 def members():
+
     conn = get_db()
 
     members = conn.execute("""
@@ -188,6 +201,7 @@ def members():
 
 @app.route("/remove-member/<int:member_id>")
 def remove_member(member_id):
+
     conn = get_db()
 
     issued_book = conn.execute(
@@ -196,6 +210,7 @@ def remove_member(member_id):
     ).fetchone()
 
     if issued_book:
+
         conn.close()
 
         return """
@@ -269,7 +284,6 @@ def return_book(book_id):
 # ---------------- START APPLICATION ----------------
 
 if __name__ == "__main__":
-    create_database()
 
     port = int(os.environ.get("PORT", 5000))
 
